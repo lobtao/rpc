@@ -6,7 +6,7 @@ class BaseRpc
 {
     public $ERR_MSG_PARAMS_ERROR = 'request parameter error';
     public $ERR_MSG_CLASS_NOT_FOUND = '`%s` does not exist';
-    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = 'medthod `{1}` does not exist in class `{0}`';
+    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = 'medthod `{0}` does not exist in class `{1}`';
 
     protected $namespace;
     protected $func;
@@ -94,8 +94,8 @@ class BaseRpc
         $object = new $className();
 
         if (!method_exists($object, $funcName)) {
-            $msg = str_replace('{0}', $className, $this->ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS);
-            $msg = str_replace('{1}', $funcName, $msg);
+            $msg = str_replace('{0}', $funcName, $this->ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS);
+            $msg = str_replace('{1}', $className, $msg);
             throw new RpcException($msg);
         }
         return call_user_func_array([$object, $funcName], $args);
