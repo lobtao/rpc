@@ -1,0 +1,21 @@
+{
+  "name": "lobtao/rpc",
+  "description": "rpc invoke",
+  "minimum-stability": "stable",
+  "keywords": ["php","rpc"],
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "lobtao",
+      "email": "lobtao@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "lobtao\\rpc\\": "src/"
+    }
+  }
+}
