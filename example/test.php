@@ -10,10 +10,12 @@ $rpc = new BaseRpc();
 $while_funcs = [
     'test_func1',
     'test_func2',
+    'test_func4',
+    'test1_func',
 ];
 // 类和方法以_分割
 // $func = 'test_func1';
-$func = 'test_func3'; // 不能访问方法
+$func = 'test1_func'; // 不能访问方法
 // 数据必须以数组包裹
 $args = [
     [

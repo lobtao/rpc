@@ -4,6 +4,10 @@ namespace lobtao\rpc;
 
 class BaseRpc
 {
+    public $ERR_MSG_PARAMS_ERROR = '请求参数错误';
+    public $ERR_MSG_CLASS_NOT_FOUND = '类 %s 不存在！';
+    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = '类 %s 中不存在 %s 方法';
+
     protected $namespace;
     protected $func;
     protected $args;
@@ -80,15 +84,15 @@ class BaseRpc
      */
     protected function invokeFunc($func, $args) {
         $params = explode('_', $func, 2);
-        if (count($params) != 2) throw new RpcException('请求参数错误');
+        if (count($params) != 2) throw new RpcException($this->ERR_MSG_PARAMS_ERROR);
 
         $serName   = ucfirst($params[0]);
         $className = $this->namespace . $serName . 'Service';
         $funcName  = $params[1];
-        if (!class_exists($className)) throw new RpcException('类' . $className . '不存在！');
+        if (!class_exists($className)) throw new RpcException(sprintf($this->ERR_MSG_CLASS_NOT_FOUND, $className));
 
         $object = new $className();
-        if (!method_exists($object, $funcName)) throw new RpcException($serName . '中不存在' . $funcName . '方法');
+        if (!method_exists($object, $funcName)) throw new RpcException(sprintf($this->ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS, $serName, $funcName));
         return call_user_func_array([$object, $funcName], $args);
     }
 
