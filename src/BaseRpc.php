@@ -9,6 +9,40 @@ class BaseRpc
     protected $args;
 
     /**
+     * 组装成功数组
+     *
+     * @param $data
+     * @param int $code
+     * @param string $msg
+     *
+     * @return array
+     */
+    public static function sccuess($data, $code = 1, $msg = 'sccuss') {
+        return [
+            'code' => $code,
+            'msg'  => $msg,
+            'data' => $data,
+        ];
+    }
+
+    /**
+     * 组装失败数组
+     *
+     * @param $data
+     * @param int $code
+     * @param string $msg
+     *
+     * @return array
+     */
+    public static function fail($data, $code = 0, $msg = 'fail') {
+        return [
+            'code' => $code,
+            'msg'  => $msg,
+            'data' => $data,
+        ];
+    }
+
+    /**
      * @param $namespace
      * @param $func
      * @param $args
@@ -44,14 +78,13 @@ class BaseRpc
      * @return mixed
      * @throws RpcException
      */
-    protected function invokeFunc($func, $args)
-    {
+    protected function invokeFunc($func, $args) {
         $params = explode('_', $func, 2);
         if (count($params) != 2) throw new RpcException('请求参数错误');
 
-        $serName = ucfirst($params[0]);
+        $serName   = ucfirst($params[0]);
         $className = $this->namespace . $serName . 'Service';
-        $funcName = $params[1];
+        $funcName  = $params[1];
         if (!class_exists($className)) throw new RpcException('类' . $className . '不存在！');
 
         $object = new $className();
