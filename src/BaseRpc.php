@@ -4,9 +4,9 @@ namespace lobtao\rpc;
 
 class BaseRpc
 {
-    public $ERR_MSG_PARAMS_ERROR = '请求参数错误';
-    public $ERR_MSG_CLASS_NOT_FOUND = '类 %s 不存在';
-    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = '类 %s 中不存在 %s 方法';
+    public $ERR_MSG_PARAMS_ERROR = 'request parameter error';
+    public $ERR_MSG_CLASS_NOT_FOUND = '%s does not exist';
+    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = '%s does not exist in class %s';
 
     protected $namespace;
     protected $func;

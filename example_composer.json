@@ -15,7 +15,8 @@
   },
   "autoload": {
     "psr-4": {
-      "lobtao\\rpc\\": "src/"
+      "lobtao\\rpc\\": "src/",
+      "lobtao\\example\\": "example/"
     }
   }
 }
