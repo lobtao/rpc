@@ -74,7 +74,7 @@ class BaseRpc
     }
 
     /**
-     * 以‘-’来分割ajax传递过来的类名和方法名，调用该方法，并返回值
+     * 以‘_’来分割ajax传递过来的类名和方法名，调用该方法，并返回值
      *
      * @param $func
      * @param $args
