@@ -6,7 +6,7 @@ class BaseRpc
 {
     public $ERR_MSG_PARAMS_ERROR = 'request parameter error';
     public $ERR_MSG_CLASS_NOT_FOUND = '%s does not exist';
-    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = '%s does not exist in class %s';
+    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = '{1} does not exist in class {0}';
 
     protected $namespace;
     protected $func;
@@ -92,7 +92,12 @@ class BaseRpc
         if (!class_exists($className)) throw new RpcException(sprintf($this->ERR_MSG_CLASS_NOT_FOUND, $className));
 
         $object = new $className();
-        if (!method_exists($object, $funcName)) throw new RpcException(sprintf($this->ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS, $serName, $funcName));
+
+        if (!method_exists($object, $funcName)) {
+            $msg = str_replace('{0}', $className, $this->ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS);
+            $msg = str_replace('{1}', $funcName, $msg);
+            throw new RpcException($msg);
+        }
         return call_user_func_array([$object, $funcName], $args);
     }
 

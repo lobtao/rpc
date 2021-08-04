@@ -15,7 +15,7 @@ $while_funcs = [
 ];
 // 类和方法以_分割
 // $func = 'test_func1';
-$func = 'test1_func'; // 不能访问方法
+$func = 'test_func5'; // 不能访问方法
 // 数据必须以数组包裹
 $args = [
     [
@@ -26,7 +26,11 @@ $args = [
 // 该部分可以放在控制器方法内, 以提供通用调用服务
 try {
     $data = $rpc->handle('lobtao\\example\\service\\', $func, $args, function ($f, $p) use ($while_funcs) {
-        if (!in_array($f, $while_funcs)) {
+        if (in_array($f, $while_funcs)) {
+            return true;
+        }
+
+        if ($f == 'test_test') {
             throw new RpcException('授权验证失败, 该方法不在白名单内');
         }
     });
