@@ -5,8 +5,8 @@ namespace lobtao\rpc;
 class BaseRpc
 {
     public $ERR_MSG_PARAMS_ERROR = 'request parameter error';
-    public $ERR_MSG_CLASS_NOT_FOUND = '%s does not exist';
-    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = '{1} does not exist in class {0}';
+    public $ERR_MSG_CLASS_NOT_FOUND = '`%s` does not exist';
+    public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = 'medthod `{1}` does not exist in class `{0}`';
 
     protected $namespace;
     protected $func;
