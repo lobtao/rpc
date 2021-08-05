@@ -12,39 +12,7 @@ class BaseRpc
     protected $func;
     protected $args;
 
-    /**
-     * 组装成功数组
-     *
-     * @param $data
-     * @param int $code
-     * @param string $msg
-     *
-     * @return array
-     */
-    public static function sccuess($data, $code = 1, $msg = 'sccuss') {
-        return [
-            'code' => $code,
-            'msg'  => $msg,
-            'data' => $data,
-        ];
-    }
 
-    /**
-     * 组装失败数组
-     *
-     * @param $data
-     * @param int $code
-     * @param string $msg
-     *
-     * @return array
-     */
-    public static function fail($data, $code = 0, $msg = 'fail') {
-        return [
-            'code' => $code,
-            'msg'  => $msg,
-            'data' => $data,
-        ];
-    }
 
     /**
      * @param $namespace
