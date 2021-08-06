@@ -34,7 +34,7 @@ class BaseRpc
 
         // 检查参数格式
         if (!empty($args)) {
-            if (!isset($args[0])) {
+            if (gettype($args) != 'array' || !isset($args[0])) {
                 throw new RpcException($this->ERR_MSG_PARAMS_ERROR);
             }
         }
