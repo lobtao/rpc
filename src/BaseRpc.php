@@ -34,7 +34,9 @@ class BaseRpc
         }
 
         // 检查参数格式
-        if (!empty($this->args)) {
+        if (empty($this->args)) {
+            $this->args = [[]];
+        }else{
             if (gettype($this->args) != 'array' || !isset($this->args[0])) {
                 throw new RpcException($this->ERR_MSG_PARAMS_FORMAT_ERROR);
             }
