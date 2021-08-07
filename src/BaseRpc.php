@@ -4,6 +4,7 @@ namespace lobtao\rpc;
 
 class BaseRpc
 {
+    public $ERR_MSG_METHOD_ERROR                = 'request method error';
     public $ERR_MSG_PARAMS_ERROR                = 'request parameter error';
     public $ERR_MSG_CLASS_NOT_FOUND             = '`%s` does not exist';
     public $ERR_MSG_FUNCTION_NOT_FOUND_IN_CLASS = 'medthod `{0}` does not exist in class `{1}`';
@@ -39,7 +40,6 @@ class BaseRpc
             }
         }
 
-
         // 权限等验证过滤处理
         if (isset($authVerify)) {
             call_user_func_array($authVerify, [$this->func, $this->args]);
@@ -60,7 +60,7 @@ class BaseRpc
     protected function invokeFunc($func, $args)
     {
         $params = explode('_', $func, 2);
-        if (count($params) != 2) throw new RpcException($this->ERR_MSG_PARAMS_ERROR);
+        if (count($params) != 2) throw new RpcException($this->ERR_MSG_METHOD_ERROR);
 
         $serName   = ucfirst($params[0]);
         $className = $this->namespace . $serName . 'Service';
