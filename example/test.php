@@ -15,7 +15,7 @@ $rpc = new BaseRpc();
  * 不存在类      test1_func
  * 禁止访问方法   test_func
  */
-$func = 'test1_func'; // 测试访问方法
+$func = 'test_func1'; // 测试访问方法
 // 数据必须以数组包裹
 $args = [
     [
@@ -25,7 +25,7 @@ $args = [
 
 // 该部分可以放在控制器方法内, 以提供通用调用服务
 try {
-    $data = $rpc->handle('lobtao\\example\\service\\', $func, $args, function ($f, $p)  {
+    $data = $rpc->handle('lobtao\\example\\service\\', $func, $args, function ($f, $p) {
         // 白名单函数
         $while_funcs = [
             'test_func1',
@@ -39,6 +39,11 @@ try {
         if ($f == 'test_func') {
             throw new RpcException('禁止访问函数');
         }
+
+        return true;
+    }, function ($classpath) {
+        // 外部创建服务类对象回调方法，hyperf等框架需要使用make函数创建对象实例，达到依赖注入的目的
+        return new $classpath();
     });
     var_dump($data);
 } catch (Exception $ex) {
