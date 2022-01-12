@@ -70,7 +70,7 @@ class BaseRpc
         if (!class_exists($className)) throw new RpcException(sprintf($this->ERR_MSG_CLASS_NOT_FOUND, $className));
 
         if (isset($outMakeInstance)) {
-            $object = $outMakeInstance($className,$args);
+            $object = $outMakeInstance($className);
         } else {
             $object = new $className();
         }
