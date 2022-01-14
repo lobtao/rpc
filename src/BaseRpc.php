@@ -17,12 +17,12 @@ class BaseRpc
      * @param $namespace
      * @param $func
      * @param $args
-     * @param null $authVerify
-     * @param null $outMakeInstance
+     * @param null $authVerifyFunc
+     * @param null $outMakeInstanceFunc
      * @return mixed
      * @throws RpcException
      */
-    public function handle($namespace, $func, $args, $authVerify = null, $outMakeInstance = null)
+    public function handle($namespace, $func, $args, $authVerifyFunc = null, $outMakeInstanceFunc = null)
     {
         $this->namespace = $namespace;
         $this->func = $func;
@@ -43,11 +43,11 @@ class BaseRpc
         }
 
         // 权限等验证过滤处理
-        if (isset($authVerify)) {
-            call_user_func_array($authVerify, [$this->func, $this->args]);
+        if (isset($authVerifyFunc)) {
+            $authVerifyFunc();
         }
 
-        return $this->invokeFunc($this->func, $this->args, $outMakeInstance);
+        return $this->invokeFunc($this->func, $this->args, $outMakeInstanceFunc);
     }
 
     /**
@@ -55,11 +55,11 @@ class BaseRpc
      *
      * @param $func
      * @param $args
-     * @param null $outMakeInstance
+     * @param null $outMakeInstanceFunc
      * @return mixed
      * @throws RpcException
      */
-    protected function invokeFunc($func, $args, $outMakeInstance = null)
+    protected function invokeFunc($func, $args, $outMakeInstanceFunc = null)
     {
         $params = explode('_', $func, 2);
         if (count($params) != 2) throw new RpcException($this->ERR_MSG_METHOD_FORMAT_ERROR);
@@ -69,8 +69,8 @@ class BaseRpc
         $funcName = $params[1];
         if (!class_exists($className)) throw new RpcException(sprintf($this->ERR_MSG_CLASS_NOT_FOUND, $className));
 
-        if (isset($outMakeInstance)) {
-            $object = $outMakeInstance($className);
+        if (isset($outMakeInstanceFunc)) {
+            $object = $outMakeInstanceFunc($className);
         } else {
             $object = new $className();
         }
