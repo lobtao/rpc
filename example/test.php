@@ -25,18 +25,18 @@ $args = [
 
 // 该部分可以放在控制器方法内, 以提供通用调用服务
 try {
-    $data = $rpc->handle('lobtao\\example\\service\\', $func, $args, function ($f, $p) {
+    $data = $rpc->handle('lobtao\\example\\service\\', $func, $args, function () use ($func) {
         // 白名单函数
         $while_funcs = [
             'test_func1',
             'test_func2',
         ];
 
-        if (in_array($f, $while_funcs)) {
+        if (in_array($func, $while_funcs)) {
             return true;
         }
 
-        if ($f == 'test_func') {
+        if ($func == 'test_func') {
             throw new RpcException('禁止访问函数');
         }
 
