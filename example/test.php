@@ -43,6 +43,7 @@ try {
         return true;
     }, function ($classpath) {
         // 外部创建服务类对象回调方法，hyperf等框架需要使用make函数创建对象实例，达到依赖注入的目的
+        // return make($classpath); // hyperf
         return new $classpath();
     });
     var_dump($data);
