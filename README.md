@@ -1,4 +1,4 @@
-# php rpc
+# A simple rpc call for php
 
 ```php
 use lobtao\rpc\BaseRpc;
