@@ -1,6 +1,6 @@
 {
   "name": "lobtao/rpc",
-  "description": "A simple rpc call for php",
+  "description": "A simple rpc invoke for php",
   "minimum-stability": "stable",
   "keywords": ["php","rpc"],
   "license": "proprietary",
