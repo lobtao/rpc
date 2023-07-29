@@ -1,3 +1,7 @@
+# install
+
+composer require lobtao/rpc
+
 # A simple rpc invoke for php
 
 ```php
